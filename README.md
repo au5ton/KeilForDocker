@@ -104,13 +104,11 @@ This works be utilizing 2 different tools called [Docker](https://en.wikipedia.o
     <details>
     <summary>What is actually being updated:</summary>
     
-    Inside `C:\Keil_v5\TOOL.INI`, under the `[UV2]` category, the property `RTEPATH` is missing. This property is missing because of the installation error seen in the previous step.
+    Inside <code>C:\Keil_v5\TOOL.INI</code>, under the <code>[UV2]</code> category, the property <code>RTEPATH</code> is missing. This property is missing because of the installation error seen in the previous step.
 
     The property should read:
 
-    ```
-    RTEPATH="C:\Keil_v5\ARM\PACK"
-    ```
+    <pre><code>RTEPATH="C:\Keil_v5\ARM\PACK"</code></pre>
     </details>
     <br>
 
