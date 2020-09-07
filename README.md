@@ -1,6 +1,6 @@
 # Keil for Docker
 
-A guide for installing the Keil ARM MDK on macOS and Linux
+A guide for installing the Keil ARM MDK on macOS and Linux.
 
 ## Introduction
 
