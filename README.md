@@ -42,11 +42,13 @@ This works be utilizing 2 different tools called [Docker](https://en.wikipedia.o
 
     ![](images/install04.png)
 
-3. Open Terminal and execute the following to download the driver script from [scottyhardy/docker-wine](https://github.com/scottyhardy/docker-wine) on Github. This will put a script file named `docker-wine` into your home directory.
+3. Open Terminal and execute the following to download the driver script from [scottyhardy/docker-wine](https://github.com/scottyhardy/docker-wine) on Github. This will put a script file named `docker-wine` into your home directory. _Do not delete this file!_
 
     **Run the following commands:**
     ```
     curl https://raw.githubusercontent.com/scottyhardy/docker-wine/master/docker-wine -o ~/docker-wine
+    ```
+    ```
     chmod +x ~/docker-wine
     ```
 
@@ -71,7 +73,7 @@ This works be utilizing 2 different tools called [Docker](https://en.wikipedia.o
 
     If you get this message, reboot and then try again.
 
-5. Once you've confirmed that your driver script is **operational**, you're ready to install the Keil ARM MDK inside your virtual environment.
+5. Once you've confirmed that your driver script is **operational**, you're ready to download the Keil ARM MDK inside your virtual environment.
 
     **Run the following command:**
     ```
@@ -82,6 +84,8 @@ This works be utilizing 2 different tools called [Docker](https://en.wikipedia.o
 
     ![](images/install05.png)
 
+6. After the installer has been downloaded, you're ready to run the installer like you would on a Windows machine.
+
     **Run the following command:**
     ```
     ./docker-wine wine explorer /home/wineuser/Downloads
@@ -91,7 +95,44 @@ This works be utilizing 2 different tools called [Docker](https://en.wikipedia.o
 
     ![](images/install06.png)
 
-    At the end of the the Keil ARM MDK installation, there will be an error that resembles the error below. It will happen during the _"Create Program Symbols ..."_ step of the installation process. **This is expected and safe to ignore.**
+    At the end of the the Keil ARM MDK installation, there will be an error message that resembles the screenshot below. It will happen during the _"Create Program Symbols ..."_ step of the installation process. **This is expected and safe to ignore. The next step fixes this error.**
 
     ![](images/install07.png)
 
+7. After the installer has completed, a configuration file must be updated. The following command will replace it with a sample that is crafted specifically for this environment.
+
+    <details>
+    <summary>What is actually being updated:</summary>
+    
+    Inside `C:\Keil_v5\TOOL.INI`, under the `[UV2]` category, the property `RTEPATH` is missing. This property is missing because of the installation error seen in the previous step.
+
+    The property should read:
+
+    ```
+    RTEPATH="C:\Keil_v5\ARM\PACK"
+    ```
+    </details>
+    <br>
+
+    **Run the following command:**
+    ```
+    ./docker-wine wget https://raw.githubusercontent.com/au5ton/KeilForDocker/master/install/TOOLS.INI -O /home/wineuser/.wine/drive_c/Keil_v5/TOOLS.INI
+    ```
+
+    ![](images/install08.png)
+
+8. Now, we will create a shortcut on the macOS desktop for us to launch _Keil ARM MDK_ without needing any complex command-line work. This is what should be used for future launches of Keil.
+
+    **Run the following commands:**
+    ```
+    echo "~/docker-wine wine /home/wineuser/.wine/drive_c/Keil_v5/UV4/UV4.exe" > ~/Desktop/Keil_ARM_MDK.command
+    ```
+    ```
+    chmod +x ~/Desktop/Keil_ARM_MDK.command
+    ```
+
+    ![](images/install09.png)
+
+9. Once prepared, launch Keil by double-clicking the shortcut we created in the previous step. _To configure Keil for your Lab work, see your TA's instructions._
+
+    ![](images/install10.png)
