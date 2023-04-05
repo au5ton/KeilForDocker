@@ -70,8 +70,21 @@ This works be utilizing 2 different tools called [Docker](https://en.wikipedia.o
     A common issue is getting a message such as:
     
     > INFO: XQuartz configuration updated.  Please reboot to enable X11 forwarding to operate.
-
+    
     If you get this message, reboot and then try again.
+    
+    > no matching manifest for linux/arm64/v8 in the manifest list entries
+    
+    If you get this message, try the following:
+       
+    1. run this command
+    ```
+    docker pull --platform linux/x86_64/v8 mysql
+    ```
+    2. add this line to your `.zshrc` or `.bashrc`
+    ```
+    export DOCKER_DEFAULT_PLATFORM=linux/x86_64/v8
+    ```
 
 5. Once you've confirmed that your driver script is **operational**, you're ready to download the Keil ARM MDK inside your virtual environment.
 
